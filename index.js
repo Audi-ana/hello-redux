@@ -1,7 +1,7 @@
 const redux = require('redux')
 
 const initialState = {
-    counter: 0
+    counter: 100
 }
 
 //create a reducer -> actually executes the update/action
@@ -15,7 +15,7 @@ let rootReducer = (state = initialState, action) =>{
     else if(action.type == "SUB_COUNTER") {
     return {
         ...state,
-        counter: state.counter + action.value
+        counter: state.counter - action.value
         }
     }
     return state 
@@ -24,6 +24,7 @@ let rootReducer = (state = initialState, action) =>{
 // //create a store
 const store = redux.createStore(rootReducer)
 
+//Subscribe -> a listener
 store.subscribe(() => {
     console.log("[Subscribed]",store.getState())
   })
@@ -35,7 +36,7 @@ console.log("Dispatching DEC_COUNTER action")
 
 store.dispatch({
     type:"SUB_COUNTER",
-    value: 10
+    value: 12
 })
 
 store.dispatch({
